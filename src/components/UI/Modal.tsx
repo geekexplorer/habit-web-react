@@ -5,36 +5,36 @@ import ReactDom from 'react-dom';
 import css from './Modal.module.css';
 
 import Button from './Button';
-import ActionBar from './ActionBar';
 
-const overlayElement = document.getElementById('overlay-root')!;
+const portalElement: HTMLElement = document.getElementById('overlay-root')!;
 
 const Backdrop: React.FC<{ onClick: () => void }> = (props) => {
-  return ReactDom.createPortal(
-    <div className={css.backdrop} onClick={props.onClick}></div>,
-    overlayElement
-  );
+  return <div className={css.backdrop} onClick={props.onClick}></div>;
 };
 
-const ModalContent: React.FC<{ onExit: () => void }> = (props) => {
-  return ReactDom.createPortal(
-    <div className={css['modal']}>
-      <div className={css['modal-content']}>
-        <div className={css['modal-content__header']}>
-          <Button onClick={props.onExit}>Exit</Button>
-        </div>
+const ModalOverlay: React.FC<{ onClose: () => void }> = (props) => {
+  return (
+    <div className={css.modal}>
+      <div className={css['modal-header']}>
+        <Button onClick={props.onClose}>X</Button>
       </div>
-      {props.children}
-    </div>,
-    overlayElement
+      <div className={css['modal-body']}>{props.children}</div>
+    </div>
   );
 };
 
-const Modal: React.FC<{ onExit: () => void }> = (props) => {
+const Modal: React.FC<{ onClose: () => void }> = (props) => {
   return (
     <Fragment>
-      <Backdrop onClick={props.onExit} />
-      <ModalContent onExit={props.onExit}>{props.children}</ModalContent>
+      {ReactDom.createPortal(
+        <Backdrop onClick={props.onClose} />,
+        portalElement
+      )}
+      {ReactDom.createPortal(
+        <ModalOverlay onClose={props.onClose}>{props.children}</ModalOverlay>,
+        portalElement
+      )}
+      ;
     </Fragment>
   );
 };

@@ -1,0 +1,26 @@
+.form-container {
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 1rem;
+  width: calc(100% - 2rem);
+  margin: 2rem;
+}
+
+.habit-form {
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 0.5rem;
+}
+
+.habit-form__title {
+  padding: 0;
+  margin: 0;
+  align-self: center;
+}
+
+.button-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  padding-top: 1rem;
+}

@@ -6,6 +6,7 @@ import PageTitle from '../../UI/PageTitle';
 import ActionBar from '../../UI/ActionBar';
 import Button from '../../UI/Button';
 import Modal from '../../UI/Modal';
+import HabitForm from '../HabitForm/HabitForm';
 
 enum ModalType {
   'CREATE',
@@ -41,7 +42,11 @@ const HabitList = () => {
   };
 
   const renderCreateModal = () => {
-    return <Modal onExit={handleModalExit}></Modal>;
+    return (
+      <Modal onClose={handleModalExit}>
+        <HabitForm onSubmit={() => {}}></HabitForm>
+      </Modal>
+    );
   };
 
   return (
@@ -55,9 +60,7 @@ const HabitList = () => {
           </ul>
         </div>
         <ActionBar>
-          <Button buttonType='habit-list' onClick={handleCreateNewHabit}>
-            Create New Habit
-          </Button>
+          <Button onClick={handleCreateNewHabit}>Create New Habit</Button>
         </ActionBar>
       </div>
     </Fragment>
