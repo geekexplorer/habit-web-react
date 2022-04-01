@@ -1,0 +1,11 @@
+.action-bar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-items: center;
+  column-gap: 0.5rem;
+}
+
+.action-bar > .button {
+  border: none;
+  background-color: transarent;
+}

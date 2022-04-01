@@ -1,0 +1,15 @@
+.habit-list {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  row-gap: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+}
