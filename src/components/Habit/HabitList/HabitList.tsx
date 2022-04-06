@@ -7,6 +7,7 @@ import ActionBar from '../../UI/ActionBar';
 import Button from '../../UI/Button';
 import Modal from '../../UI/Modal';
 import HabitForm, { CreateHabitData } from '../HabitForm/HabitForm';
+import HabitModel from '../../../models/HabitModel';
 
 enum ModalType {
   'CREATE',
@@ -17,12 +18,11 @@ enum ModalType {
 
 const HabitList: React.FC<{
   onCreateNewHabit: (habitData: CreateHabitData) => void;
+  habitListModel: HabitModel[];
 }> = (props) => {
   // State
   const [showModal, setShowModal] = useState(true);
-  const [modalType, setModalType] = useState<ModalType | null>(
-    ModalType.CREATE
-  );
+  const [modalType, setModalType] = useState<ModalType | null>(ModalType.CREATE);
 
   //  HabitList Handlers
   const handleCreateNewHabitBtnClick = () => {
@@ -63,9 +63,7 @@ const HabitList: React.FC<{
           </ul>
         </div>
         <ActionBar>
-          <Button onClick={handleCreateNewHabitBtnClick}>
-            Create New Habit
-          </Button>
+          <Button onClick={handleCreateNewHabitBtnClick}>Create New Habit</Button>
         </ActionBar>
       </div>
     </Fragment>
