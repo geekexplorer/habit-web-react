@@ -18,9 +18,20 @@
   align-self: center;
 }
 
+.habit-form label {
+  font-weight: bold;
+}
+
 .button-container {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   padding-top: 1rem;
+}
+
+.error-message {
+  padding: 0.25rem;
+  background-color: pink;
+  border: 1px solid red;
+  font-weight: bold;
 }
