@@ -1,12 +1,18 @@
-import { Fragment, useState, createRef } from 'react';
+import { useState, createRef } from 'react';
 
 import css from './HabitForm.module.css';
 
 import Button from '../../UI/Button';
-import { stringify } from 'querystring';
-import { setDefaultResultOrder } from 'dns/promises';
 
-const HabitForm: React.FC<{ onSubmit: () => void }> = (props) => {
+export type CreateHabitData = {
+  name: string;
+  startDate: Date;
+  duration: number;
+};
+
+const HabitForm: React.FC<{
+  onSubmit: (habitData: CreateHabitData) => void;
+}> = (props) => {
   const [name, setName] = useState();
   const [startDate, setStartDate] = useState<Date>();
   const [duration, setDuration] = useState<number>();
@@ -26,7 +32,8 @@ const HabitForm: React.FC<{ onSubmit: () => void }> = (props) => {
     }
 
     setError(undefined);
-    console.log(name, startDate, duration);
+
+    props.onSubmit({ name: name, startDate: startDate, duration: duration });
   };
 
   const validateFormData = (
@@ -62,7 +69,7 @@ const HabitForm: React.FC<{ onSubmit: () => void }> = (props) => {
 
   return (
     <div className={css['form-container']}>
-      <form onSubmit={props.onSubmit} className={css['habit-form']}>
+      <form className={css['habit-form']}>
         <h3 className={css['habit-form__title']}>Create New Habit</h3>
         {error && <div className={css['error-message']}>{error}</div>}
         <label htmlFor='name'>Name</label>

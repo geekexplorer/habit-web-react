@@ -6,7 +6,7 @@ import PageTitle from '../../UI/PageTitle';
 import ActionBar from '../../UI/ActionBar';
 import Button from '../../UI/Button';
 import Modal from '../../UI/Modal';
-import HabitForm from '../HabitForm/HabitForm';
+import HabitForm, { CreateHabitData } from '../HabitForm/HabitForm';
 
 enum ModalType {
   'CREATE',
@@ -15,20 +15,23 @@ enum ModalType {
   'ERROR',
 }
 
-const HabitList = () => {
+const HabitList: React.FC<{
+  onCreateNewHabit: (habitData: CreateHabitData) => void;
+}> = (props) => {
   // State
   const [showModal, setShowModal] = useState(true);
   const [modalType, setModalType] = useState<ModalType | null>(
     ModalType.CREATE
   );
 
-  // Handlers
-  const handleCreateNewHabit = () => {
+  //  HabitList Handlers
+  const handleCreateNewHabitBtnClick = () => {
     console.log('click');
     setShowModal(true);
     setModalType(ModalType.CREATE);
   };
 
+  // Modal Handlers
   const handleModalExit = () => {
     setShowModal(false);
   };
@@ -44,7 +47,7 @@ const HabitList = () => {
   const renderCreateModal = () => {
     return (
       <Modal onClose={handleModalExit}>
-        <HabitForm onSubmit={() => {}}></HabitForm>
+        <HabitForm onSubmit={props.onCreateNewHabit}></HabitForm>
       </Modal>
     );
   };
@@ -60,7 +63,9 @@ const HabitList = () => {
           </ul>
         </div>
         <ActionBar>
-          <Button onClick={handleCreateNewHabit}>Create New Habit</Button>
+          <Button onClick={handleCreateNewHabitBtnClick}>
+            Create New Habit
+          </Button>
         </ActionBar>
       </div>
     </Fragment>
