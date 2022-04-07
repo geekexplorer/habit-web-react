@@ -29,7 +29,7 @@ const HabitList: React.FC<HabitListProps> = (props) => {
   // State
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<ModalType | null>(ModalType.CREATE);
-  const [currentHabit, setCurrentHabit] = useState<HabitData>();
+  const [currentHabit, setCurrentHabit] = useState<HabitModel>();
 
   useEffect(() => {
     setShowModal(false);
