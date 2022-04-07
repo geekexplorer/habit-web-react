@@ -2,39 +2,39 @@ import React, { useState, createRef, useEffect } from 'react';
 
 import css from './HabitForm.module.css';
 
-import { HabitData } from '../../../models/HabitModel';
+import HabitModel, { HabitData } from '../../../models/HabitModel';
 import Button from '../../UI/Button';
 
 export type HabitFormProps = {
-  habit?: HabitData;
+  habit?: HabitData | HabitModel;
   submitText: string;
   onSubmit: (habitData: HabitData) => void;
 };
 
 const HabitForm: React.FC<HabitFormProps> = (props) => {
-  const [name, setName] = useState(props.habit?.title);
+  const [name, setName] = useState(props.habit?.name);
   const [startDate, setStartDate] = useState<Date>(props.habit ? new Date(props.habit.startDate) : new Date());
   const [duration, setDuration] = useState<number>(props.habit?.duration!);
   const [error, setError] = useState<string>();
 
-  const titleRef = createRef<HTMLInputElement>();
+  const nameRef = createRef<HTMLInputElement>();
   const startDateRef = createRef<HTMLInputElement>();
   const durationRef = createRef<HTMLInputElement>();
 
   const handleSubmit = () => {
-    const title = titleRef.current!.value;
+    const name = nameRef.current!.value;
     const startDate = new Date(startDateRef.current!.value);
     const duration = durationRef.current!.value;
 
-    if (!validateFormData(title, startDate, duration)) {
+    if (!validateFormData(name, startDate, duration)) {
       return;
     }
 
-    props.onSubmit({ title: title, startDate: startDate, duration: +duration });
+    props.onSubmit({ name: name, startDate: startDate, duration: +duration });
   };
 
-  const validateFormData = (title: string, startDate: Date, duration: string) => {
-    if (title.length < 1) {
+  const validateFormData = (name: string, startDate: Date, duration: string) => {
+    if (name.length < 1) {
       setError('You must enter a habit name.');
       return false;
     }
@@ -66,8 +66,8 @@ const HabitForm: React.FC<HabitFormProps> = (props) => {
       <form className={css['habit-form']}>
         <h3 className={css['habit-form__title']}>Create New Habit</h3>
         {error && <div className={css['error-message']}>{error}</div>}
-        <label htmlFor='title'>Name</label>
-        <input ref={titleRef} type='text' name='title' id='title' defaultValue={name} />
+        <label htmlFor='name'>Name</label>
+        <input ref={nameRef} type='text' name='name' id='name' defaultValue={name} />
         <label htmlFor='startDate'>Start Date</label>
         <input
           ref={startDateRef}

@@ -57,12 +57,17 @@ function App() {
     });
   };
 
+  const handleEditHabit = async (habitData: HabitData) => {
+    console.log(habitData);
+  };
+
   return (
     <div className={css.App}>
       <HabitList
         habitListModel={habits}
         onCreateNewHabit={handleCreateNewHabit}
         onDeleteHabit={handleDeleteHabit}
+        onEditHabit={handleEditHabit}
       ></HabitList>
     </div>
   );

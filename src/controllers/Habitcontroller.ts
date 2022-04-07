@@ -21,12 +21,7 @@ export const HabitController = {
 
   async createHabit(habitData: HabitData): Promise<HabitServiceResponse<HabitModel> | HabitServiceResponse<string>> {
     try {
-      const newHabitData = new HabitModel(
-        habitData.title,
-        habitData.startDate.toUTCString(),
-        habitData.duration,
-        false
-      );
+      const newHabitData = new HabitModel(habitData.name, habitData.startDate.toUTCString(), habitData.duration);
       const newHabit = await REST.Post<HabitModel>(API_URL, newHabitData);
       return new HabitServiceResponse<HabitModel>(true, newHabit);
     } catch (err) {
@@ -37,7 +32,7 @@ export const HabitController = {
 
   async deleteHabit(id: string): Promise<HabitServiceResponse<string>> {
     try {
-      const result = await REST.Delete(`${API_URL}/${id}`);
+      await REST.Delete(`${API_URL}/${id}`);
       return new HabitServiceResponse<string>(true);
     } catch (err) {
       console.error(err);

@@ -1,4 +1,4 @@
-import { Fragment, MouseEvent } from 'react';
+import { Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
@@ -7,7 +7,7 @@ import css from './HabitDetail.module.css';
 import HabitModel from '../../../models/HabitModel';
 
 const HabitDetail: React.FC<{ habit: HabitModel; onDeleteHabit: (id: string) => void }> = (props) => {
-  const handleDeleteClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleDeleteClick = () => {
     props.onDeleteHabit(props.habit.id!);
   };
 
@@ -15,9 +15,9 @@ const HabitDetail: React.FC<{ habit: HabitModel; onDeleteHabit: (id: string) => 
     <Fragment>
       <div className={css['habit-detail']}>
         <div className={css['habit-detail__title']}>
-          <h3>{props.habit.title}</h3>
+          <h3>{props.habit.name}</h3>
         </div>
-        <div className={css['habit-detail__start-date']}>{new Date(props.habit.dateStarted).toLocaleDateString()}</div>
+        <div className={css['habit-detail__start-date']}>{new Date(props.habit.startDate).toLocaleDateString()}</div>
         <div className={css['habit-detail__actions']}>
           <div>
             <FontAwesomeIcon icon={regular('pen-to-square')} />

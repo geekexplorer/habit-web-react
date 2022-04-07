@@ -18,14 +18,18 @@ enum ModalType {
   'ERROR',
 }
 
-const HabitList: React.FC<{
+export type HabitListProps = {
   onCreateNewHabit: (habitData: HabitData) => void;
   onDeleteHabit: (id: string) => void;
+  onEditHabit: (habitData: HabitData) => void;
   habitListModel: HabitModel[];
-}> = (props) => {
+};
+
+const HabitList: React.FC<HabitListProps> = (props) => {
   // State
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<ModalType | null>(ModalType.CREATE);
+  const [currentHabit, setCurrentHabit] = useState<HabitData>();
 
   useEffect(() => {
     setShowModal(false);
@@ -54,6 +58,14 @@ const HabitList: React.FC<{
     return (
       <Modal onClose={handleModalExit}>
         <HabitForm onSubmit={props.onCreateNewHabit} submitText='Create New Habit'></HabitForm>
+      </Modal>
+    );
+  };
+
+  const renderEditModal = () => {
+    return (
+      <Modal onClose={handleModalExit}>
+        <HabitForm onSubmit={props.onEditHabit} submitText='Edit Habit' habit={currentHabit}></HabitForm>
       </Modal>
     );
   };
