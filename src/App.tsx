@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { HabitController } from './controllers/HabitController';
 
+import css from './App.module.css';
+
 import { useEffect } from 'react';
 
 import { CreateHabitData } from './components/Habit/HabitForm/HabitForm';
@@ -45,7 +47,7 @@ function App() {
   };
 
   return (
-    <div className='App'>
+    <div className={css.App}>
       <HabitList habitListModel={habits} onCreateNewHabit={handleCreateNewHabit}></HabitList>
     </div>
   );

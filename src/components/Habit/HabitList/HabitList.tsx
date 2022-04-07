@@ -56,13 +56,7 @@ const HabitList: React.FC<{
   const renderHabits = () => {
     console.log('here');
     if (props.habitListModel && props.habitListModel.length > 0) {
-      return (
-        <ul>
-          {props.habitListModel.map((habit) => (
-            <HabitItem key={habit.id} habit={habit} />
-          ))}
-        </ul>
-      );
+      return props.habitListModel.map((habit) => <HabitItem key={habit.id} habit={habit} />);
     } else {
       return 'You are not currently tracking any habits.';
     }
@@ -73,7 +67,7 @@ const HabitList: React.FC<{
       {showModal ? renderModal() : ''}
       <div className={css['habit-list']}>
         <PageTitle text='My Habit List' />
-        <div className={css['habit-list']}>{renderHabits()}</div>
+        <div className={css['habit-items']}>{renderHabits()}</div>
         <ActionBar>
           <Button onClick={handleCreateNewHabitBtnClick}>Create New Habit</Button>
         </ActionBar>

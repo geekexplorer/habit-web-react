@@ -7,12 +7,10 @@ import HabitModel from '../../../models/HabitModel';
 
 const HabitItem: React.FC<{ habit: HabitModel }> = (props) => {
   return (
-    <li>
-      <div className={css['habit-item']}>
-        <HabitDetail habit={props.habit} />
-        <HabitDays days={props.habit.days} />
-      </div>
-    </li>
+    <div className={css['habit-item']}>
+      <HabitDetail habit={props.habit} />
+      <HabitDays days={props.habit.days} />
+    </div>
   );
 };
 
