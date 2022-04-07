@@ -2,6 +2,8 @@
   display: flex;
   flex-flow: column nowrap;
   flex: 1 1 30%;
+  align-items: center;
+  row-gap: 0.5rem;
 }
 
 .habit-detail__title {
@@ -16,4 +18,10 @@
 }
 
 .habit-detail__actions {
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 0.75rem;
+}
+
+.habit-detail__actions div {
 }

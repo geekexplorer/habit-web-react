@@ -1,6 +1,7 @@
 .habit-days {
   display: flex;
   flex-flow: row wrap;
-  column-gap: 0.5rem;
+  column-gap: 1rem;
+  row-gap: 0.5rem;
   flex: 1 1 70%;
 }
