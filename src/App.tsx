@@ -6,10 +6,8 @@ import css from './App.module.css';
 
 import { useEffect } from 'react';
 
-import { CreateHabitData } from './components/Habit/HabitForm/HabitForm';
-
 import HabitList from './components/Habit/HabitList/HabitList';
-import HabitModel from './models/HabitModel';
+import HabitModel, { HabitData } from './models/HabitModel';
 
 function App() {
   const [habits, setHabits] = useState<HabitModel[]>([]);
@@ -33,7 +31,7 @@ function App() {
 
   // Handlers
 
-  const handleCreateNewHabit = async (habitData: CreateHabitData) => {
+  const handleCreateNewHabit = async (habitData: HabitData) => {
     const result = await HabitController.createHabit(habitData);
     if (!result.success) {
       // TODO: Need to surface error to UI here.

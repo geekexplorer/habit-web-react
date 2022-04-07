@@ -6,8 +6,8 @@ import PageTitle from '../../UI/PageTitle';
 import ActionBar from '../../UI/ActionBar';
 import Button from '../../UI/Button';
 import Modal from '../../UI/Modal';
-import HabitForm, { CreateHabitData } from '../HabitForm/HabitForm';
-import HabitModel from '../../../models/HabitModel';
+import HabitForm from '../HabitForm/HabitForm';
+import HabitModel, { HabitData } from '../../../models/HabitModel';
 
 import HabitItem from '../HabitItem/HabitItem';
 
@@ -19,7 +19,7 @@ enum ModalType {
 }
 
 const HabitList: React.FC<{
-  onCreateNewHabit: (habitData: CreateHabitData) => void;
+  onCreateNewHabit: (habitData: HabitData) => void;
   onDeleteHabit: (id: string) => void;
   habitListModel: HabitModel[];
 }> = (props) => {
@@ -53,7 +53,7 @@ const HabitList: React.FC<{
   const renderCreateModal = () => {
     return (
       <Modal onClose={handleModalExit}>
-        <HabitForm onSubmit={props.onCreateNewHabit}></HabitForm>
+        <HabitForm onSubmit={props.onCreateNewHabit} submitText='Create New Habit'></HabitForm>
       </Modal>
     );
   };

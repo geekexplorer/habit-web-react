@@ -1,4 +1,4 @@
-class DayModel {
+export default class DayModel {
   public date: string;
   public completed: boolean;
 
@@ -8,4 +8,7 @@ class DayModel {
   }
 }
 
-export default DayModel;
+export type DayData = {
+  date: Date;
+  compelted: boolean;
+};

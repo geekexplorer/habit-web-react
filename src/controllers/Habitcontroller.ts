@@ -1,7 +1,5 @@
 import { REST } from './RESTHelpers';
-import { CreateHabitData } from '../components/Habit/HabitForm/HabitForm';
-import HabitModel from '../models/HabitModel';
-import { takeCoverage } from 'v8';
+import HabitModel, { HabitData } from '../models/HabitModel';
 
 const API_URL = 'http://budgie-i7:5091/api/habit';
 
@@ -21,11 +19,14 @@ export const HabitController = {
     }
   },
 
-  async createHabit(
-    habitData: CreateHabitData
-  ): Promise<HabitServiceResponse<HabitModel> | HabitServiceResponse<string>> {
+  async createHabit(habitData: HabitData): Promise<HabitServiceResponse<HabitModel> | HabitServiceResponse<string>> {
     try {
-      const newHabitData = new HabitModel(habitData.name, habitData.startDate.toUTCString(), habitData.duration, false);
+      const newHabitData = new HabitModel(
+        habitData.title,
+        habitData.startDate.toUTCString(),
+        habitData.duration,
+        false
+      );
       const newHabit = await REST.Post<HabitModel>(API_URL, newHabitData);
       return new HabitServiceResponse<HabitModel>(true, newHabit);
     } catch (err) {

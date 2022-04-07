@@ -1,8 +1,8 @@
-import DayModel from './DayModel';
+import DayModel, { DayData } from './DayModel';
 
 import dayjs from 'dayjs';
 
-class HabitModel {
+export default class HabitModel {
   public id?: string;
   public title: string;
   public dateStarted: Date;
@@ -30,9 +30,15 @@ class HabitModel {
     for (let x = 0; x < this.duration; x++) {
       newDays.push(new DayModel(beginningDate.add(x, 'day').toDate().toUTCString(), false));
     }
-
     return newDays;
   }
 }
 
-export default HabitModel;
+export type HabitData = {
+  id?: string;
+  title: string;
+  startDate: Date;
+  duration: number;
+  Days?: DayData[];
+  done?: boolean;
+};
