@@ -1,6 +1,7 @@
 import { REST } from './RESTHelpers';
 import { CreateHabitData } from '../components/Habit/HabitForm/HabitForm';
 import HabitModel from '../models/HabitModel';
+import { takeCoverage } from 'v8';
 
 const API_URL = 'http://budgie-i7:5091/api/habit';
 
@@ -32,13 +33,23 @@ export const HabitController = {
       return new HabitServiceResponse(false, 'Unable to create new habit.');
     }
   },
+
+  async deleteHabit(id: string): Promise<HabitServiceResponse<string>> {
+    try {
+      const result = await REST.Delete(`${API_URL}/${id}`);
+      return new HabitServiceResponse<string>(true);
+    } catch (err) {
+      console.error(err);
+      return new HabitServiceResponse(false, `Unable to delete habit. (id=${id})`);
+    }
+  },
 };
 
 export class HabitServiceResponse<T> {
   public success: boolean;
-  public data: T;
+  public data?: T;
 
-  constructor(success: boolean, data: T) {
+  constructor(success: boolean, data?: T) {
     this.success = success;
     this.data = data;
   }

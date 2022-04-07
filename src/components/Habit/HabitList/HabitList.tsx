@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 
 import css from './HabitList.module.css';
 
@@ -20,11 +20,16 @@ enum ModalType {
 
 const HabitList: React.FC<{
   onCreateNewHabit: (habitData: CreateHabitData) => void;
+  onDeleteHabit: (id: string) => void;
   habitListModel: HabitModel[];
 }> = (props) => {
   // State
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<ModalType | null>(ModalType.CREATE);
+
+  useEffect(() => {
+    setShowModal(false);
+  }, [props.habitListModel]);
 
   //  HabitList Handlers
   const handleCreateNewHabitBtnClick = () => {
@@ -56,7 +61,9 @@ const HabitList: React.FC<{
   const renderHabits = () => {
     console.log('here');
     if (props.habitListModel && props.habitListModel.length > 0) {
-      return props.habitListModel.map((habit) => <HabitItem key={habit.id} habit={habit} />);
+      return props.habitListModel.map((habit) => (
+        <HabitItem key={habit.id} habit={habit} onDeleteHabit={props.onDeleteHabit} />
+      ));
     } else {
       return 'You are not currently tracking any habits.';
     }

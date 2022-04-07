@@ -46,9 +46,26 @@ function App() {
     });
   };
 
+  const handleDeleteHabit = async (id: string) => {
+    const result = await HabitController.deleteHabit(id);
+
+    if (!result.success) {
+      //TODO: Surface error to ui
+      return;
+    }
+
+    setHabits((pre) => {
+      return pre.filter((habit) => habit.id !== id);
+    });
+  };
+
   return (
     <div className={css.App}>
-      <HabitList habitListModel={habits} onCreateNewHabit={handleCreateNewHabit}></HabitList>
+      <HabitList
+        habitListModel={habits}
+        onCreateNewHabit={handleCreateNewHabit}
+        onDeleteHabit={handleDeleteHabit}
+      ></HabitList>
     </div>
   );
 }
