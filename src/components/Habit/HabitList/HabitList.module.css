@@ -2,6 +2,7 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  justify-content: center;
   row-gap: 1rem;
 }
 
@@ -12,6 +13,7 @@ ul {
 }
 
 li {
+  padding-bottom: 1rem;
 }
 
 .habit-list__create-habit-btn {

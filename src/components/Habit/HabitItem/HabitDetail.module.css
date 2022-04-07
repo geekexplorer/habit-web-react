@@ -1,0 +1,19 @@
+.habit-detail {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1 1 30%;
+}
+
+.habit-detail__title {
+}
+
+.habit-detail__title h3 {
+  padding: 0;
+  margin: 0;
+}
+
+.habit-detail__start-date {
+}
+
+.habit-detail__actions {
+}

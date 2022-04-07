@@ -1,4 +1,4 @@
-import Day from './DayModel';
+import DayModel from './DayModel';
 
 import dayjs from 'dayjs';
 
@@ -7,7 +7,7 @@ class HabitModel {
   public title: string;
   public dateStarted: Date;
   public duration: number;
-  public days: Day[];
+  public days: DayModel[];
   public done: boolean;
 
   public constructor(
@@ -15,7 +15,7 @@ class HabitModel {
     startDate: string,
     duration: number,
     done: boolean,
-    days: Day[] | undefined = undefined
+    days: DayModel[] | undefined = undefined
   ) {
     this.title = name;
     this.dateStarted = new Date(startDate);
@@ -25,10 +25,10 @@ class HabitModel {
   }
 
   private generateDays() {
-    const newDays = new Array<Day>();
+    const newDays = new Array<DayModel>();
     const beginningDate = dayjs(this.dateStarted);
     for (let x = 0; x < this.duration; x++) {
-      newDays.push(new Day(beginningDate.add(x, 'day').toDate().toUTCString(), false));
+      newDays.push(new DayModel(beginningDate.add(x, 'day').toDate().toUTCString(), false));
     }
 
     return newDays;

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-import { HabitController } from './controllers/Habitcontroller';
+import { HabitController } from './controllers/HabitController';
 
-import './App.css';
+import { useEffect } from 'react';
+
 import { CreateHabitData } from './components/Habit/HabitForm/HabitForm';
 
 import HabitList from './components/Habit/HabitList/HabitList';
@@ -10,6 +11,25 @@ import HabitModel from './models/HabitModel';
 
 function App() {
   const [habits, setHabits] = useState<HabitModel[]>([]);
+
+  useEffect(() => {
+    const loadHabits = async () => {
+      // TODO: Add loading spinner
+
+      const response = await HabitController.getHabits();
+
+      if (!response.success) {
+        // TODO: Surface error to UI here.
+        return;
+      }
+      setHabits(response.data as HabitModel[]);
+
+      // TODO: Remove loading spinner
+    };
+    loadHabits();
+  }, []);
+
+  // Handlers
 
   const handleCreateNewHabit = async (habitData: CreateHabitData) => {
     const result = await HabitController.createHabit(habitData);

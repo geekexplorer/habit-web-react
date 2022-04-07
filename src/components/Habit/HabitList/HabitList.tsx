@@ -9,6 +9,8 @@ import Modal from '../../UI/Modal';
 import HabitForm, { CreateHabitData } from '../HabitForm/HabitForm';
 import HabitModel from '../../../models/HabitModel';
 
+import HabitItem from '../HabitItem/HabitItem';
+
 enum ModalType {
   'CREATE',
   'EDIT',
@@ -21,12 +23,11 @@ const HabitList: React.FC<{
   habitListModel: HabitModel[];
 }> = (props) => {
   // State
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<ModalType | null>(ModalType.CREATE);
 
   //  HabitList Handlers
   const handleCreateNewHabitBtnClick = () => {
-    console.log('click');
     setShowModal(true);
     setModalType(ModalType.CREATE);
   };
@@ -52,16 +53,27 @@ const HabitList: React.FC<{
     );
   };
 
+  const renderHabits = () => {
+    console.log('here');
+    if (props.habitListModel && props.habitListModel.length > 0) {
+      return (
+        <ul>
+          {props.habitListModel.map((habit) => (
+            <HabitItem key={habit.id} habit={habit} />
+          ))}
+        </ul>
+      );
+    } else {
+      return 'You are not currently tracking any habits.';
+    }
+  };
+
   return (
     <Fragment>
       {showModal ? renderModal() : ''}
       <div className={css['habit-list']}>
         <PageTitle text='My Habit List' />
-        <div>
-          <ul>
-            <li>Morning Meditation</li>
-          </ul>
-        </div>
+        <div className={css['habit-list']}>{renderHabits()}</div>
         <ActionBar>
           <Button onClick={handleCreateNewHabitBtnClick}>Create New Habit</Button>
         </ActionBar>
