@@ -59,7 +59,6 @@ const HabitList: React.FC<{
   };
 
   const renderHabits = () => {
-    console.log('here');
     if (props.habitListModel && props.habitListModel.length > 0) {
       return props.habitListModel.map((habit) => (
         <HabitItem key={habit.id} habit={habit} onDeleteHabit={props.onDeleteHabit} />
