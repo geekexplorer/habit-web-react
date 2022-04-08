@@ -8,63 +8,73 @@ import { useEffect } from 'react';
 
 import HabitList from './components/Habit/HabitList/HabitList';
 import HabitModel from './models/HabitModel';
+import AlertModal from './components/UI/AlertModal';
+import Spinner from './components/UI/Spinner';
 
 function App() {
   const [habits, setHabits] = useState<HabitModel[]>([]);
+  const [error, setError] = useState<string>();
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     const loadHabits = async () => {
-      // TODO: Add loading spinner
-
+      handleToggleSpinner();
       const response = await HabitController.getHabits();
 
       if (!response.success) {
-        // TODO: Surface error to UI here.
+        setError(response.data as string);
         return;
       }
+      handleToggleSpinner();
       setHabits(response.data as HabitModel[]);
-
-      // TODO: Remove loading spinner
     };
     loadHabits();
   }, []);
 
   // Handlers
 
+  const handleToggleSpinner = () => {
+    setSpinner((prev) => !prev);
+  };
+
   const handleCreateNewHabit = async (habitData: HabitModel) => {
+    handleToggleSpinner();
     const result = await HabitController.createHabit(habitData);
     if (!result.success) {
-      // TODO: Need to surface error to UI here.
-      console.error(result.data);
+      setError(result.data as string);
       return;
     }
 
+    handleToggleSpinner();
     setHabits((prev) => {
       return [...prev, result.data as HabitModel];
     });
   };
 
   const handleDeleteHabit = async (id: string) => {
+    handleToggleSpinner();
     const result = await HabitController.deleteHabit(id);
 
     if (!result.success) {
-      //TODO: Surface error to ui
+      setError(result.data as string);
       return;
     }
-
+    handleToggleSpinner();
     setHabits((pre) => {
       return pre.filter((habit) => habit.id !== id);
     });
   };
 
   const handleEditHabit = async (habitData: HabitModel) => {
+    handleToggleSpinner();
     const result = await HabitController.updateHabit(habitData.id!, habitData);
     if (!result.success) {
-      //TODO: Surface error
+      setError(result.data as string);
       return;
     }
 
     const habitIndex = habits.findIndex((habit) => habit.id === habitData.id);
+    handleToggleSpinner();
     setHabits((prev) => {
       const updatedHabits = [...prev];
       updatedHabits[habitIndex] = habitData;
@@ -72,14 +82,26 @@ function App() {
     });
   };
 
+  // Modal Handlers
+
+  const handleModalClose = () => {
+    setError(undefined);
+  };
+
   return (
     <div className={css.App}>
+      {error && <AlertModal onClose={handleModalClose} title='An Error Occured' message={error} />}
       <HabitList
         habitListModel={habits}
         onCreateNewHabit={handleCreateNewHabit}
         onDeleteHabit={handleDeleteHabit}
         onEditHabit={handleEditHabit}
-      ></HabitList>
+      />
+      {spinner && (
+        <div className={css['spinner-container']}>
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 }

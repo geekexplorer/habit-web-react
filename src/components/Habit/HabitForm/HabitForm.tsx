@@ -40,7 +40,7 @@ const HabitForm: React.FC<HabitFormProps> = (props) => {
     updatedHabit.id = props.habit?.id;
 
     if (
-      startDate.getDate() === props.habit?.startDate.getDate() &&
+      startDate.getDate() === new Date(props.habit?.startDate).getDate() &&
       +duration === props.habit?.duration &&
       props.habit.days
     ) {
@@ -94,7 +94,7 @@ const HabitForm: React.FC<HabitFormProps> = (props) => {
           defaultValue={getDateInputFormat(startDate)}
         />
         <label htmlFor='duration'>Duration</label>
-        <input ref={durationRef} type='number' min='7' max='31' defaultValue={duration} />
+        <input ref={durationRef} type='number' min='7' max='31' defaultValue={duration || 7} />
       </form>
       <div className={css['button-container']}>
         <Button onClick={handleSubmit}>{props.submitText}</Button>

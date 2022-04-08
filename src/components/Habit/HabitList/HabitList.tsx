@@ -22,6 +22,7 @@ export type HabitListProps = {
   onCreateNewHabit: (habitData: HabitModel) => void;
   onDeleteHabit: (id: string) => void;
   onEditHabit: (habitData: HabitModel) => void;
+
   habitListModel: HabitModel[];
 };
 
@@ -59,6 +60,16 @@ const HabitList: React.FC<HabitListProps> = (props) => {
     setShowModal(false);
   };
 
+  const handleCreateNewHabit = (habit: HabitModel) => {
+    setShowModal(false);
+    props.onCreateNewHabit(habit);
+  };
+
+  const handleEditHabit = (habit: HabitModel) => {
+    setShowModal(false);
+    props.onEditHabit(habit);
+  };
+
   const handleDeleteHabit = () => {
     props.onDeleteHabit(currentHabit!.id!);
   };
@@ -78,7 +89,7 @@ const HabitList: React.FC<HabitListProps> = (props) => {
   const renderCreateModal = () => {
     return (
       <Modal onClose={handleModalExit}>
-        <HabitForm onSubmit={props.onCreateNewHabit} submitText='Create New Habit'></HabitForm>
+        <HabitForm onSubmit={handleCreateNewHabit} submitText='Create New Habit'></HabitForm>
       </Modal>
     );
   };
@@ -86,7 +97,7 @@ const HabitList: React.FC<HabitListProps> = (props) => {
   const renderEditModal = () => {
     return (
       <Modal onClose={handleModalExit}>
-        <HabitForm onSubmit={props.onEditHabit} submitText='Edit Habit' habit={currentHabit}></HabitForm>
+        <HabitForm onSubmit={handleEditHabit} submitText='Edit Habit' habit={currentHabit}></HabitForm>
       </Modal>
     );
   };

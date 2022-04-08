@@ -5,3 +5,14 @@
   margin: auto;
   width: 100%;
 }
+
+.spinner-container {
+  z-index: 50;
+  position: absolute;
+  left: 47.5%;
+  top: 5rem;
+}
+
+.spinner-container svg {
+  z-index: 50;
+}

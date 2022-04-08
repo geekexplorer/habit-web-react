@@ -1,8 +1,9 @@
 .form-container {
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
   row-gap: 1rem;
-  width: calc(100% - 2rem);
+  width: calc(100%);
   margin: 2rem;
 }
 
@@ -10,10 +11,12 @@
   display: flex;
   flex-flow: column nowrap;
   row-gap: 0.5rem;
+  width: 25%;
 }
 
 .habit-form__title {
   padding: 0;
+  padding-bottom: 1rem;
   margin: 0;
   align-self: center;
 }
@@ -33,5 +36,4 @@
   padding: 0.25rem;
   background-color: pink;
   border: 1px solid red;
-  font-weight: bold;
 }

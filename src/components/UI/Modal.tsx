@@ -26,15 +26,8 @@ const ModalOverlay: React.FC<{ onClose: () => void }> = (props) => {
 const Modal: React.FC<{ onClose: () => void }> = (props) => {
   return (
     <Fragment>
-      {ReactDom.createPortal(
-        <Backdrop onClick={props.onClose} />,
-        portalElement
-      )}
-      {ReactDom.createPortal(
-        <ModalOverlay onClose={props.onClose}>{props.children}</ModalOverlay>,
-        portalElement
-      )}
-      ;
+      {ReactDom.createPortal(<Backdrop onClick={props.onClose} />, portalElement)}
+      {ReactDom.createPortal(<ModalOverlay onClose={props.onClose}>{props.children}</ModalOverlay>, portalElement)}
     </Fragment>
   );
 };
