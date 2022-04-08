@@ -7,7 +7,7 @@ export default class HabitModel {
   public name: string;
   public startDate: Date;
   public duration: number;
-  public days: DayModel[];
+  public days?: DayModel[];
 
   public constructor(name: string, startDate: string, duration: number, days: DayModel[] | undefined = undefined) {
     this.name = name;
@@ -25,11 +25,3 @@ export default class HabitModel {
     return newDays;
   }
 }
-
-export type HabitData = {
-  id?: string;
-  name: string;
-  startDate: Date;
-  duration: number;
-  Days?: DayData[];
-};

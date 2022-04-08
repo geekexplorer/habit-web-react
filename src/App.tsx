@@ -7,7 +7,7 @@ import css from './App.module.css';
 import { useEffect } from 'react';
 
 import HabitList from './components/Habit/HabitList/HabitList';
-import HabitModel, { HabitData } from './models/HabitModel';
+import HabitModel from './models/HabitModel';
 
 function App() {
   const [habits, setHabits] = useState<HabitModel[]>([]);
@@ -31,7 +31,7 @@ function App() {
 
   // Handlers
 
-  const handleCreateNewHabit = async (habitData: HabitData) => {
+  const handleCreateNewHabit = async (habitData: HabitModel) => {
     const result = await HabitController.createHabit(habitData);
     if (!result.success) {
       // TODO: Need to surface error to UI here.
@@ -57,8 +57,19 @@ function App() {
     });
   };
 
-  const handleEditHabit = async (habitData: HabitData) => {
-    console.log(habitData);
+  const handleEditHabit = async (habitData: HabitModel) => {
+    const result = await HabitController.updateHabit(habitData.id!, habitData);
+    if (!result.success) {
+      //TODO: Surface error
+      return;
+    }
+
+    const habitIndex = habits.findIndex((habit) => habit.id === habitData.id);
+    setHabits((prev) => {
+      const updatedHabits = [...prev];
+      updatedHabits[habitIndex] = habitData;
+      return updatedHabits;
+    });
   };
 
   return (

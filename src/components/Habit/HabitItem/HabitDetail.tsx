@@ -4,11 +4,15 @@ import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import css from './HabitDetail.module.css';
 
-import HabitModel from '../../../models/HabitModel';
+import { HabitItemProps } from './HabitItem';
 
-const HabitDetail: React.FC<{ habit: HabitModel; onDeleteHabit: (id: string) => void }> = (props) => {
+const HabitDetail: React.FC<HabitItemProps> = (props) => {
   const handleDeleteClick = () => {
-    props.onDeleteHabit(props.habit.id!);
+    props.handleDeleteHabit(props.habit.id!);
+  };
+
+  const handleEditClick = () => {
+    props.handleEditHabit(props.habit);
   };
 
   return (
@@ -19,7 +23,7 @@ const HabitDetail: React.FC<{ habit: HabitModel; onDeleteHabit: (id: string) => 
         </div>
         <div className={css['habit-detail__start-date']}>{new Date(props.habit.startDate).toLocaleDateString()}</div>
         <div className={css['habit-detail__actions']}>
-          <div>
+          <div onClick={handleEditClick}>
             <FontAwesomeIcon icon={regular('pen-to-square')} />
           </div>
           <div onClick={handleDeleteClick}>

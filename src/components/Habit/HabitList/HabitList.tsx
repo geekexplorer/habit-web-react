@@ -7,7 +7,7 @@ import ActionBar from '../../UI/ActionBar';
 import Button from '../../UI/Button';
 import Modal from '../../UI/Modal';
 import HabitForm from '../HabitForm/HabitForm';
-import HabitModel, { HabitData } from '../../../models/HabitModel';
+import HabitModel from '../../../models/HabitModel';
 
 import HabitItem from '../HabitItem/HabitItem';
 
@@ -19,9 +19,9 @@ enum ModalType {
 }
 
 export type HabitListProps = {
-  onCreateNewHabit: (habitData: HabitData) => void;
+  onCreateNewHabit: (habitData: HabitModel) => void;
   onDeleteHabit: (id: string) => void;
-  onEditHabit: (habitData: HabitData) => void;
+  onEditHabit: (habitData: HabitModel) => void;
   habitListModel: HabitModel[];
 };
 
@@ -41,6 +41,13 @@ const HabitList: React.FC<HabitListProps> = (props) => {
     setModalType(ModalType.CREATE);
   };
 
+  // HabitItem Handlers
+  const handleEditClick = (habit: HabitModel) => {
+    setCurrentHabit(habit);
+    setShowModal(true);
+    setModalType(ModalType.EDIT);
+  };
+
   // Modal Handlers
   const handleModalExit = () => {
     setShowModal(false);
@@ -51,6 +58,8 @@ const HabitList: React.FC<HabitListProps> = (props) => {
     switch (modalType) {
       case ModalType.CREATE:
         return renderCreateModal();
+      case ModalType.EDIT:
+        return renderEditModal();
     }
   };
 
@@ -73,7 +82,12 @@ const HabitList: React.FC<HabitListProps> = (props) => {
   const renderHabits = () => {
     if (props.habitListModel && props.habitListModel.length > 0) {
       return props.habitListModel.map((habit) => (
-        <HabitItem key={habit.id} habit={habit} onDeleteHabit={props.onDeleteHabit} />
+        <HabitItem
+          key={habit.id}
+          habit={habit}
+          handleDeleteHabit={props.onDeleteHabit}
+          handleEditHabit={handleEditClick}
+        />
       ));
     } else {
       return 'You are not currently tracking any habits.';

@@ -5,11 +5,21 @@ import HabitDays from './HabitDays';
 
 import HabitModel from '../../../models/HabitModel';
 
-const HabitItem: React.FC<{ habit: HabitModel; onDeleteHabit: (id: string) => void }> = (props) => {
+export type HabitItemProps = {
+  habit: HabitModel;
+  handleDeleteHabit: (id: string) => void;
+  handleEditHabit: (habit: HabitModel) => void;
+};
+
+const HabitItem: React.FC<HabitItemProps> = (props) => {
   return (
     <div className={css['habit-item']}>
-      <HabitDetail habit={props.habit} onDeleteHabit={props.onDeleteHabit} />
-      <HabitDays days={props.habit.days} />
+      <HabitDetail
+        habit={props.habit}
+        handleDeleteHabit={props.handleDeleteHabit}
+        handleEditHabit={props.handleEditHabit}
+      />
+      <HabitDays days={props.habit.days!} />
     </div>
   );
 };

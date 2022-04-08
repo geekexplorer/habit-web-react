@@ -2,13 +2,13 @@ import React, { useState, createRef, useEffect } from 'react';
 
 import css from './HabitForm.module.css';
 
-import HabitModel, { HabitData } from '../../../models/HabitModel';
+import HabitModel from '../../../models/HabitModel';
 import Button from '../../UI/Button';
 
 export type HabitFormProps = {
-  habit?: HabitData | HabitModel;
+  habit?: HabitModel;
   submitText: string;
-  onSubmit: (habitData: HabitData) => void;
+  onSubmit: (habitData: HabitModel) => void;
 };
 
 const HabitForm: React.FC<HabitFormProps> = (props) => {
@@ -30,7 +30,9 @@ const HabitForm: React.FC<HabitFormProps> = (props) => {
       return;
     }
 
-    props.onSubmit({ name: name, startDate: startDate, duration: +duration });
+    const updatedHabit = new HabitModel(name, startDate.toUTCString(), +duration);
+    updatedHabit.id = props.habit!.id;
+    props.onSubmit(updatedHabit);
   };
 
   const validateFormData = (name: string, startDate: Date, duration: string) => {

@@ -1,5 +1,5 @@
 import { REST } from './RESTHelpers';
-import HabitModel, { HabitData } from '../models/HabitModel';
+import HabitModel from '../models/HabitModel';
 
 const API_URL = 'http://budgie-i7:5091/api/habit';
 
@@ -19,7 +19,7 @@ export const HabitController = {
     }
   },
 
-  async createHabit(habitData: HabitData): Promise<HabitServiceResponse<HabitModel> | HabitServiceResponse<string>> {
+  async createHabit(habitData: HabitModel): Promise<HabitServiceResponse<HabitModel> | HabitServiceResponse<string>> {
     try {
       const newHabitData = new HabitModel(habitData.name, habitData.startDate.toUTCString(), habitData.duration);
       const newHabit = await REST.Post<HabitModel>(API_URL, newHabitData);
@@ -37,6 +37,19 @@ export const HabitController = {
     } catch (err) {
       console.error(err);
       return new HabitServiceResponse(false, `Unable to delete habit. (id=${id})`);
+    }
+  },
+
+  async updateHabit(
+    id: string,
+    habitData: HabitModel
+  ): Promise<HabitServiceResponse<HabitModel> | HabitServiceResponse<string>> {
+    try {
+      await REST.Put(`${API_URL}/${id}`, habitData);
+      return new HabitServiceResponse<HabitModel>(true);
+    } catch (err) {
+      console.error(err);
+      return new HabitServiceResponse(false, `Unable to update habit. (id=${id})`);
     }
   },
 };
