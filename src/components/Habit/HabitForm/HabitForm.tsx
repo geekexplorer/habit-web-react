@@ -31,7 +31,22 @@ const HabitForm: React.FC<HabitFormProps> = (props) => {
     }
 
     const updatedHabit = new HabitModel(name, startDate.toUTCString(), +duration);
-    updatedHabit.id = props.habit!.id;
+
+    if (!props.habit) {
+      props.onSubmit(updatedHabit);
+      return;
+    }
+
+    updatedHabit.id = props.habit?.id;
+
+    if (
+      startDate.getDate() === props.habit?.startDate.getDate() &&
+      +duration === props.habit?.duration &&
+      props.habit.days
+    ) {
+      updatedHabit.days = [...props.habit.days];
+    }
+
     props.onSubmit(updatedHabit);
   };
 

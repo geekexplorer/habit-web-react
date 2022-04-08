@@ -8,8 +8,8 @@ import Button from '../../UI/Button';
 import Modal from '../../UI/Modal';
 import HabitForm from '../HabitForm/HabitForm';
 import HabitModel from '../../../models/HabitModel';
-
 import HabitItem from '../HabitItem/HabitItem';
+import AlertModal from '../../UI/AlertModal';
 
 enum ModalType {
   'CREATE',
@@ -48,9 +48,19 @@ const HabitList: React.FC<HabitListProps> = (props) => {
     setModalType(ModalType.EDIT);
   };
 
+  const handleDeleteClick = (id: string) => {
+    setCurrentHabit(props.habitListModel.find((habit) => habit.id === id));
+    setShowModal(true);
+    setModalType(ModalType.DELETE);
+  };
+
   // Modal Handlers
   const handleModalExit = () => {
     setShowModal(false);
+  };
+
+  const handleDeleteHabit = () => {
+    props.onDeleteHabit(currentHabit!.id!);
   };
 
   // Modals
@@ -60,6 +70,8 @@ const HabitList: React.FC<HabitListProps> = (props) => {
         return renderCreateModal();
       case ModalType.EDIT:
         return renderEditModal();
+      case ModalType.DELETE:
+        return renderDeleteModal();
     }
   };
 
@@ -79,13 +91,21 @@ const HabitList: React.FC<HabitListProps> = (props) => {
     );
   };
 
+  const renderDeleteModal = () => {
+    const title = 'Just Checking...';
+    const message = `Are you sure you want to DELETE ${currentHabit!.name}?`;
+    return (
+      <AlertModal onClose={handleModalExit} action={handleDeleteHabit} message={message} title={title}></AlertModal>
+    );
+  };
+
   const renderHabits = () => {
     if (props.habitListModel && props.habitListModel.length > 0) {
       return props.habitListModel.map((habit) => (
         <HabitItem
           key={habit.id}
           habit={habit}
-          handleDeleteHabit={props.onDeleteHabit}
+          handleDeleteHabit={handleDeleteClick}
           handleEditHabit={handleEditClick}
           handleToggleDay={props.onEditHabit}
         />
