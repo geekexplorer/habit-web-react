@@ -87,6 +87,7 @@ const HabitList: React.FC<HabitListProps> = (props) => {
           habit={habit}
           handleDeleteHabit={props.onDeleteHabit}
           handleEditHabit={handleEditClick}
+          handleToggleDay={props.onEditHabit}
         />
       ));
     } else {

@@ -4,7 +4,13 @@ import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import css from './HabitDetail.module.css';
 
-import { HabitItemProps } from './HabitItem';
+import HabitModel from '../../../models/HabitModel';
+
+export type HabitItemProps = {
+  habit: HabitModel;
+  handleDeleteHabit: (id: string) => void;
+  handleEditHabit: (habit: HabitModel) => void;
+};
 
 const HabitDetail: React.FC<HabitItemProps> = (props) => {
   const handleDeleteClick = () => {
