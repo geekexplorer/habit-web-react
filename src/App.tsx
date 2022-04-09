@@ -99,8 +99,6 @@ function App() {
     return parse(error as string);
   };
 
-  console.log(css['spinner-container']);
-
   return (
     <div className={css.App}>
       {error && (
