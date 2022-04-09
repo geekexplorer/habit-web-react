@@ -11,8 +11,27 @@
   position: absolute;
   left: 47.5%;
   top: 5rem;
+  display: block;
 }
 
 .spinner-container svg {
   z-index: 50;
+}
+
+.spinner-container-enter {
+  opacity: 0;
+}
+
+.spinner-container-enter-active {
+  opacity: 1;
+  transition: opacity 250ms;
+}
+
+.spinner-container-exit {
+  opacity: 1;
+}
+
+.spinner-container-exit-active {
+  opacity: 0;
+  transition: opacity 250ms;
 }

@@ -12,6 +12,7 @@
   align-items: center;
   row-gap: 1rem;
   margin: 1rem 0;
+  width: 100%;
 }
 
 ul {
@@ -22,7 +23,4 @@ ul {
 
 li {
   padding-bottom: 1rem;
-}
-
-.habit-list__create-habit-btn {
 }

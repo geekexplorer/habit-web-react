@@ -4,7 +4,7 @@ import css from './HabitForm.module.css';
 
 import HabitModel from '../../../models/HabitModel';
 import Button from '../../UI/Button';
-import PageTitle from '../../UI/PageTitle';
+import ModalTitle from '../../UI/ModalTitle';
 
 export type HabitFormProps = {
   habit?: HabitModel;
@@ -82,7 +82,7 @@ const HabitForm: React.FC<HabitFormProps> = (props) => {
   return (
     <div className={css['form-container']}>
       <form className={css['habit-form']}>
-        <PageTitle text='Create New Habit'></PageTitle>
+        <ModalTitle text='Create New Habit'></ModalTitle>
         {error && <div className={css['error-message']}>{error}</div>}
         <label htmlFor='name'>Name</label>
         <input ref={nameRef} type='text' name='name' id='name' defaultValue={name} />
