@@ -1,4 +1,4 @@
-import DayModel, { DayData } from './DayModel';
+import DayModel from './DayModel';
 
 import dayjs from 'dayjs';
 

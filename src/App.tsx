@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import parse from 'html-react-parser';
 import { CSSTransition } from 'react-transition-group';
@@ -13,7 +13,6 @@ import HabitList from './components/Habit/HabitList/HabitList';
 import HabitModel from './models/HabitModel';
 import AlertModal from './components/UI/AlertModal';
 import Spinner from './components/UI/Spinner';
-import { faScaleBalanced } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [habits, setHabits] = useState<HabitModel[]>([]);

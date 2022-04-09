@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React, { useState, createRef } from 'react';
 
 import css from './HabitForm.module.css';
 
@@ -13,9 +13,9 @@ export type HabitFormProps = {
 };
 
 const HabitForm: React.FC<HabitFormProps> = (props) => {
-  const [name, setName] = useState(props.habit?.name);
-  const [startDate, setStartDate] = useState<Date>(props.habit ? new Date(props.habit.startDate) : new Date());
-  const [duration, setDuration] = useState<number>(props.habit?.duration!);
+  const [name] = useState(props.habit?.name);
+  const [startDate] = useState<Date>(props.habit ? new Date(props.habit.startDate) : new Date());
+  const [duration] = useState<number>(props.habit?.duration!);
   const [error, setError] = useState<string>();
 
   const nameRef = createRef<HTMLInputElement>();
