@@ -7,7 +7,7 @@ import Button from './Button';
 
 export type AlertModalProps = {
   title: string;
-  message: string;
+  message: JSX.Element;
   action?: () => void;
   onClose: () => void;
 };

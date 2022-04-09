@@ -37,3 +37,9 @@
   background-color: pink;
   border: 1px solid red;
 }
+
+.habit-form > input {
+  font-family: 'Shadows Into Light Two';
+  border: 2px solid;
+  border-radius: var(--div-border-radius);
+}

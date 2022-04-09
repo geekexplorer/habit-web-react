@@ -1,8 +1,68 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Shadows Into Light Two', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fonts */
+
+@font-face {
+  font-family: 'Shadows Into Light Two';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('./fonts/shadows-into-light-two-v11-latin-regular\ \(1\).woff2') format('woff2'),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */ url('./fonts/shadows-into-light-two-v11-latin-regular\ \(1\).woff')
+      format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+:root {
+  /* Color Variables */
+  --font-color: #322329;
+  --background-color: white;
+  --border-color: #277da1ff;
+  --title-color: #f8961eff;
+  --habit-name-color: #277da1ff;
+  --habit-border-color: #277da1ff;
+  --button-color: #7fc96bff;
+  --modal-title-color: #ffd043ff;
+  --modal-button-color: #ffd043ff;
+  --day-complete-color: #ffd043ff;
+  --day-incomplete-color: lightslategray;
+  --error-color: rgba(230, 50, 50, 0.5);
+  --error-border-color: #e63232ff;
+  --alert-title-color: #f8961eff;
+  --box-shadow-color: hsla(0, 0%, 0%, 0.3);
+
+  --div-border-radius: 230px 15px 225px 15px/15px 225px 15px 10px;
+  --button-border-radius: 255px 15px 225px 15px/15px 225px 15px 10px;
+}
+
+.div-border {
+  border: 5px solid var(--border-color);
+  border-radius: var(--div-border-radius);
+  padding: 0.4rem;
+}
+
+.habit-border {
+  border: 5px solid var(--border-color);
+  border-radius: var(--div-border-radius);
+  padding: 0.04rem;
+}
+
+.button-border {
+  border: 4px solid var(--button-color);
+  border-radius: var(--button-border-radius);
+  padding: 0 0.4rem 0 0.4rem;
+}
+
+.title-border {
+  border: 4px solid var(--title-color);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 10px;
+  padding: 0 0.4rem 0 0.4rem;
+}
+
+.box-shadow {
+  box-shadow: 2px 8px 4px -6px var(--box-shadow-color);
 }

@@ -2,6 +2,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
+  color: var(--day-incomplete-color);
 }
 
 .icon {
@@ -15,5 +16,5 @@
 
 .day-date {
   font-size: 0.75rem;
-  color: rgba(0, 0, 0, 0.3);
+  color: var(--day-incomplete-color);
 }

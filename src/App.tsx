@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import parse from 'html-react-parser';
+
 import { HabitController } from './controllers/HabitController';
 
 import css from './App.module.css';
@@ -10,6 +12,7 @@ import HabitList from './components/Habit/HabitList/HabitList';
 import HabitModel from './models/HabitModel';
 import AlertModal from './components/UI/AlertModal';
 import Spinner from './components/UI/Spinner';
+import { JSDocComment } from 'typescript';
 
 function App() {
   const [habits, setHabits] = useState<HabitModel[]>([]);
@@ -88,9 +91,15 @@ function App() {
     setError(undefined);
   };
 
+  const getMessageElement = () => {
+    return parse(error as string);
+  };
+
   return (
     <div className={css.App}>
-      {error && <AlertModal onClose={handleModalClose} title='An Error Occured' message={error} />}
+      {error && (
+        <AlertModal onClose={handleModalClose} title='An Error Occured' message={getMessageElement() as JSX.Element} />
+      )}
       <HabitList
         habitListModel={habits}
         onCreateNewHabit={handleCreateNewHabit}

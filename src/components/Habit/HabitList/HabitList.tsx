@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect } from 'react';
 
 import css from './HabitList.module.css';
 
+import parse from 'html-react-parser';
 import PageTitle from '../../UI/PageTitle';
 import ActionBar from '../../UI/ActionBar';
 import Button from '../../UI/Button';
@@ -104,9 +105,18 @@ const HabitList: React.FC<HabitListProps> = (props) => {
 
   const renderDeleteModal = () => {
     const title = 'Just Checking...';
-    const message = `Are you sure you want to DELETE ${currentHabit!.name}?`;
+
+    const message = parse(
+      `Are you sure you want to delete <span style='font-weight: bold'>${currentHabit!.name}</span>?`,
+      {}
+    );
     return (
-      <AlertModal onClose={handleModalExit} action={handleDeleteHabit} message={message} title={title}></AlertModal>
+      <AlertModal
+        onClose={handleModalExit}
+        action={handleDeleteHabit}
+        message={message as JSX.Element}
+        title={title}
+      ></AlertModal>
     );
   };
 

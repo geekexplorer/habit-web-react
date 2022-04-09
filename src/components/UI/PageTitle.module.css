@@ -1,4 +1,9 @@
 .page-title {
   margin: 0;
   padding: 0;
+  background-color: var(--title-color);
+  border: 3px solid var(--title-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--div-border-radius);
+  text-align: center;
 }
