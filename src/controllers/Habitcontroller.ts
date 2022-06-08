@@ -1,7 +1,7 @@
 import { REST } from './RESTHelpers';
 import HabitModel from '../models/HabitModel';
 
-const API_URL = 'http://budgie-i7:5091/api/habit';
+const API_URL = 'http://ubuntu-7010:5091/api/habit';
 
 export enum RequestStatus {
   Ok,
