@@ -15,7 +15,7 @@ export const HabitController = {
       return new HabitServiceResponse<HabitModel[]>(true, habits);
     } catch (err) {
       console.error(err);
-      return new HabitServiceResponse(false, 'Unable to retrive habits.');
+      return new HabitServiceResponse(false, 'Unable to retrieve habits.');
     }
   },
 
