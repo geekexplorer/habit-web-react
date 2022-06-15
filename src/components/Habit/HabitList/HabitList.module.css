@@ -3,7 +3,7 @@
   flex-flow: column nowrap;
   align-items: center;
   row-gap: 1rem;
-  width: 90%;
+  padding-top: 2rem;
 }
 
 .habit-items {
